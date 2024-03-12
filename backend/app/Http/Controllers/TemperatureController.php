@@ -23,7 +23,7 @@ class TemperatureController extends Controller
         if($temperature === null) {
             $temperature = $this->fetchTemperatureFromApi();
 
-            Redis::set(self::$redisKey, $temperature);
+            Redis::setex(self::$redisKey, 600, $temperature);
         }
 
         return response()->json(['temperature' => $temperature]);
