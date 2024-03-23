@@ -6,6 +6,9 @@ import Layout from "./components/Layout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
+import EventCalendarView from "./pages/Views/EventCalendarView.jsx";
+import Home from "./pages/Home.jsx";
+import CalendarCreator from "./pages/CalendarCreator.jsx";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +17,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
+                path: "/",
+                element: <Home />,
+            },
+            {
                 path: "/register",
                 element: <Register />,
             },
@@ -21,6 +28,15 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <Login />,
             },
+            {
+                path: "/createCalendar",
+                element: <CalendarCreator />,
+            },
+            {
+                path: "/calendar",
+                element: <EventCalendarView />,
+            },
+
         ],
     },
 ]);

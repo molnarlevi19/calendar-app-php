@@ -24,11 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::post('storeCalendar', [CalendarController::class, 'store']);
-    Route::post('storeEvent', [EventController::class, 'store']);
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
+Route::post('storeCalendar', [CalendarController::class, 'store']);
+Route::post('storeEvent', [EventController::class, 'store']);
 Route::get('temperature', [TemperatureController::class, 'getTemperature']);
 
 Route::post('register', [AuthController::class, 'register']);
