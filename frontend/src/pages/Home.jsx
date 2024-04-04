@@ -10,7 +10,8 @@ const Home = () => {
             </div>
             <Link to="/register">Register</Link><br/>
             <Link to="/login">Login</Link><br/>
-            <Link to="/createCalendar">Create a new Calendar</Link>
+            <Link to="/createCalendar">Create a new Calendar</Link><br/>
+            <Link to="/test">All created Calendars</Link>
             <div>Todays nameday:</div>
         </div>
     )
