@@ -33,8 +33,8 @@ const Login = () => {
                 }, 1500);
             })
             .catch(error => {
-                clearInputs();
                 console.error(error);
+                clearInputs();
                 setTimeout(() => {
                 }, 2500);
             })
