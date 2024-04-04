@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 const Login = () => {
     let navigate = useNavigate();
@@ -25,13 +25,16 @@ const Login = () => {
             .then(data => {
                 clearInputs();
                 localStorage.setItem("userToken", data.token);
+                localStorage.setItem("user_id", data.user_id);
                 console.log('Token:', data.token);
+                console.log('Token:', data.user_id);
                 setTimeout(() => {
                     navigate('/')
                 }, 1500);
             })
             .catch(error => {
                 clearInputs();
+                console.error(error);
                 setTimeout(() => {
                 }, 2500);
             })
