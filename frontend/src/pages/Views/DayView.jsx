@@ -1,6 +1,9 @@
 import {useState} from "react";
+import {useParams} from "react-router-dom";
 
 const DayView = ({ day }) => {
+    const { id } = useParams();
+
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [title, setTitle] = useState("");
@@ -30,7 +33,7 @@ const DayView = ({ day }) => {
                     event_description: description,
                     start_date: startDate,
                     end_date: endDate,
-                    calendar_id: 1
+                    calendar_id: id
                 })
             })
                 .then(response => response.json())

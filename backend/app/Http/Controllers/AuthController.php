@@ -8,6 +8,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,23 +43,18 @@ class AuthController extends Controller
 
     public function login(Request $request): JsonResponse
     {
-        $fields = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $fields['email'])->first();
-
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
-
-            return response()->json([
-                'message' => 'Bad credentials',
-            ], Response::HTTP_UNAUTHORIZED);
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('myapptoken')->plainTextToken;
+            return response()->json(['token' => $token, 'user_id' => $user->id], Response::HTTP_OK);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        return response()->json(['token' => $token], Response::HTTP_OK);
+        return response()->json(['message' => 'Bad credentials'], Response::HTTP_UNAUTHORIZED);
     }
 
     public function logout(): array

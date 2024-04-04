@@ -6,6 +6,7 @@ use App\Models\Calendar;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -36,5 +37,20 @@ class CalendarController extends Controller
         ]);
 
         return \response()->json([$calendar], Response::HTTP_CREATED);
+    }
+
+    public function allCalendars(): array
+    {
+     $user = Auth::user();
+
+     $calendars = $user->calendars;
+     $calendarNames = [];
+
+         foreach ($calendars as $calendar) {
+
+             $calendarNames[$calendar->calendar_id] = $calendar->calendar_name;
+         }
+
+         return $calendarNames;
     }
 }

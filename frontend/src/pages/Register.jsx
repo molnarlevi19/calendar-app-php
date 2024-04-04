@@ -8,7 +8,6 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [data, setData] = useState(null);
 
     function clearInputs() {
         setUsername('')
@@ -43,6 +42,7 @@ const Register = () => {
             })
             .catch(error => {
                 clearInputs();
+                console.error(error);
                 setTimeout(() => {
                     console.log('hi')
                 }, 2500);
@@ -51,7 +51,7 @@ const Register = () => {
     }
 
     return(
-        <form class="form-container" onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <div className="container">
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
@@ -104,4 +104,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Register;
