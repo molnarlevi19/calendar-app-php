@@ -5,6 +5,7 @@ const CalendarCreator = () => {
     const [description, setDescription] = useState("");
 
     const handleSubmitCalendar = () => {
+        const userId= localStorage.getItem("user_id");
 
         fetch('http://127.0.0.1:8000/api/storeCalendar', {
             method: 'POST',
@@ -12,7 +13,7 @@ const CalendarCreator = () => {
             body: JSON.stringify({
                 calendar_name: name,
                 calendar_description: description,
-                user_id: 1
+                user_id: userId
             })
         }).then(r => r.json())
             .then(data => {
