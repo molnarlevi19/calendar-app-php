@@ -1,4 +1,5 @@
 # Skedule (Calendar-app)
+![Alt text](images/skedule2.jpg)  
 
 Skedule is a powerful calendar app built with React and Laravel.  Manage your time effectively by creating and organizing events across multiple calendars.
 
