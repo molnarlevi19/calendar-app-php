@@ -24,10 +24,14 @@ const DayView = ({ day }) => {
         if (startTime !== null && endTime !== null && title.trim() !== "" && description.trim() !== "") {
             const startDate = `${day.toISOString().split('T')[0]}T${startTime}:00`;
             const endDate = `${day.toISOString().split('T')[0]}T${endTime}:00`;
+            const token = localStorage.getItem('userToken');
 
             fetch('http://127.0.0.1:8000/api/storeEvent', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
                 body: JSON.stringify({
                     event_title: title,
                     event_description: description,
@@ -54,7 +58,7 @@ const DayView = ({ day }) => {
             hours.push(
                 <div
                     key={i}
-                    className={`hour ${i === startTime ? 'start-time' : ''} ${i > startTime && i < endTime ? 'selected' : ''} ${i === endTime ? 'end-time' : ''}`}
+                    className={`hour cursor-pointer p-2 border border-gray-200 ${i === startTime ? 'bg-green-300' : ''} ${i > startTime && i < endTime ? 'bg-green-300' : ''} ${i === endTime ? 'bg-green-300' : ''}`}
                     onClick={() => handleTimeClick(i)}
                 >
                     {`${i < 10 ? '0' + i : i}:00`}
@@ -73,11 +77,13 @@ const DayView = ({ day }) => {
                     placeholder="Event Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    className="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
                 />
                 <textarea
                     placeholder="Event Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    className="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 mt-2 resize-none text-sm"
                 />
             </div>
             <div className="hour-container">

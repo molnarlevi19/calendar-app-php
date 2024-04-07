@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isToday } from 'date-fns';
-import './EventCalendar.css';
 import DayView from "./DayView.jsx";
 
 const EventCalendarView = () => {
@@ -18,22 +17,22 @@ const EventCalendarView = () => {
     };
 
     return (
-        <div className="container">
-            <div className="month">
+        <div className="container max-w-400px mx-auto text-center">
+            <div className="month text-lg font-semibold mb-4">
                 {format(currentDate, 'MMMM yyyy')}
             </div>
-            <div className="weekdays">
+            <div className="weekdays grid grid-cols-7 gap-2">
                 {WEEKDAYS.map((day) => (
-                    <div key={day} className="weekday">
+                    <div key={day} className="weekday font-semibold">
                         {day}
                     </div>
                 ))}
             </div>
-            <div className="days">
+            <div className="days grid grid-cols-7 gap-2">
                 {daysInMonth.map((day, index) => (
                     <div
                         key={index}
-                        className={`day ${isToday(day) ? 'today' : ''}`}
+                        className={`day border border-gray-300 rounded p-2 ${isToday(day) ? 'bg-blue-500 text-white' : ''} ${selectedDay && format(selectedDay, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd') ? 'bg-green-500' : ''}`}
                         onClick={() => handleDayClick(day)}
                     >
                         {format(day, 'd')}
