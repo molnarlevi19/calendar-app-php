@@ -35,19 +35,24 @@ const UserAllCalendars = () => {
     }
 
     return (
-        <div>
-            <h2>Calendar Names:</h2>
-            <ul>
-                {calendars.map(calendar => (
-                    <li key={calendar.calendar_id}>
-                        <Link to={`/calendar/${calendar.calendar_id}`}>
-                            {calendar.calendar_name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-12">
+            <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h1 className="text-2xl font-bold mb-4">Your Calendars</h1>
+                <div className="mb-4">
+                    <h2 className="text-lg font-bold mb-2">Calendar Names:</h2>
+                    <ul>
+                        {calendars.map((calendar) => (
+                            <li key={calendar.calendar_id} className="mb-2">
+                                <Link to={`/calendar/${calendar.calendar_id}`} className="text-blue-500 hover:underline">
+                                    {calendar.calendar_name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
 export default UserAllCalendars;

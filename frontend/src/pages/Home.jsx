@@ -1,20 +1,12 @@
-import {Link} from "react-router-dom";
 
 const Home = () => {
     //const todayNameDay = nameday.today("hu");
 
     return (
-        <div>
-            <div>
-                Welcome to Calendar
-            </div>
-            <Link to="/register">Register</Link><br/>
-            <Link to="/login">Login</Link><br/>
-            <Link to="/createCalendar">Create a new Calendar</Link><br/>
-            <Link to="/test">All created Calendars</Link>
-            <div>Todays nameday:</div>
+        <div className="container mx-auto mt-8">
+            <h1 className="text-3xl font-bold mb-4">Welcome to Your Calendar App</h1>
         </div>
     )
 }
 
-export default Home
+export default Home;
