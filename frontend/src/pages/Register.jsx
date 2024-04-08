@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     let navigate = useNavigate();
-    const [isLogined,setIsLogined] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -15,15 +13,9 @@ const Register = () => {
         setPassword('')
     }
 
-    useEffect(() =>{
-        setIsLogined( localStorage.getItem('userToken') !== null);
-        if(isLogined){
-            navigate("/")
-        }
-    },[isLogined])
-
     const handleSubmit = (event) => {
         event.preventDefault();
+        const registerUrl = '/api/register';
 
         const requestOptions = {
             method: 'POST',
@@ -31,23 +23,19 @@ const Register = () => {
             body: JSON.stringify({ username: username, password: password, email: email })
         };
 
-        fetch('http://127.0.0.1:8000/api/register', requestOptions)
+        fetch(registerUrl, requestOptions)
             .then(response => response.json())
             .then(data => {
+                navigate("/");
+                console.log(data);
                 clearInputs();
-                setData(data)
-                setTimeout(() => {
-                    console.log('hi')
-                }, 2500);
+
             })
             .catch(error => {
-                clearInputs();
                 console.error(error);
-                setTimeout(() => {
-                    console.log('hi')
-                }, 2500);
-            })
+                clearInputs();
 
+            });
     }
 
     return (

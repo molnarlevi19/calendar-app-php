@@ -5,10 +5,11 @@ const CalendarCreator = () => {
     const [description, setDescription] = useState("");
 
     const handleSubmitCalendar = () => {
+        const createCalendarUrl = '/api/storeCalendar';
         const userId= localStorage.getItem("user_id");
         const token= localStorage.getItem("userToken");
 
-        fetch('http://127.0.0.1:8000/api/storeCalendar', {
+        fetch(createCalendarUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ const CalendarCreator = () => {
                 calendar_name: name,
                 calendar_description: description,
                 user_id: userId
-            })
+            }),
         }).then(r => r.json())
             .then(data => {
                 console.log(data);
@@ -27,7 +28,7 @@ const CalendarCreator = () => {
             .catch(e => {
                 console.error('Error:', e);
 
-            })
+            });
      }
 
     return (
@@ -73,4 +74,4 @@ const CalendarCreator = () => {
     );
 }
 
-export default CalendarCreator
+export default CalendarCreator;

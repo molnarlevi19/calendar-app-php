@@ -13,6 +13,7 @@ const Login = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
+        const LoginUrl = '/api/login';
 
         const requestOptions = {
             method: 'POST',
@@ -20,7 +21,7 @@ const Login = () => {
             body: JSON.stringify({email: email, password: password})
         };
 
-        fetch('http://127.0.0.1:8000/api/login', requestOptions)
+        fetch(LoginUrl, requestOptions)
             .then(response => response.json())
             .then(data => {
                 clearInputs();
@@ -34,7 +35,8 @@ const Login = () => {
             .catch(error => {
                 console.error(error);
                 clearInputs();
-            })
+
+            });
     }
 
     return (
@@ -83,4 +85,4 @@ const Login = () => {
     );
 }
 
-export default Login
+export default Login;

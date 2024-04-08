@@ -9,9 +9,10 @@ const UserAllCalendars = () => {
     }, []);
 
     const allCalendars = () => {
+        const allCalendarsUrl = '/api/allCalendars';
         const token = localStorage.getItem('userToken');
 
-        fetch('http://127.0.0.1:8000/api/allCalendars', {
+        fetch(allCalendarsUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
