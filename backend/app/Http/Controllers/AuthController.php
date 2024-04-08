@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\RegisterRequest;
 use App\Models\User;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
