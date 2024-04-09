@@ -21,12 +21,14 @@ const DayView = ({ day }) => {
     };
 
     const handleSubmitEvent = () => {
+        const createEventUrl = '/api/storeEvent';
+
         if (startTime !== null && endTime !== null && title.trim() !== "" && description.trim() !== "") {
             const startDate = `${day.toISOString().split('T')[0]}T${startTime}:00`;
             const endDate = `${day.toISOString().split('T')[0]}T${endTime}:00`;
             const token = localStorage.getItem('userToken');
 
-            fetch('http://127.0.0.1:8000/api/storeEvent', {
+            fetch(createEventUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ const DayView = ({ day }) => {
                     start_date: startDate,
                     end_date: endDate,
                     calendar_id: id
-                })
+                }),
             })
                 .then(response => response.json())
                 .then(data => {
@@ -53,8 +55,10 @@ const DayView = ({ day }) => {
     };
 
     const renderHours = () => {
+        const hoursInADay = 24;
         let hours = [];
-        for (let i = 0; i < 24; i++) {
+
+        for (let i = 0; i < hoursInADay; i++) {
             hours.push(
                 <div
                     key={i}

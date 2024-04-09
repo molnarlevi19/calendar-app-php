@@ -1,6 +1,4 @@
-
 const Home = () => {
-    //const todayNameDay = nameday.today("hu");
 
     return (
         <div className="container mx-auto mt-8">
