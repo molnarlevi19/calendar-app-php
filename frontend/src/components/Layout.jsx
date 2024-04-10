@@ -24,8 +24,12 @@ const Layout = () => {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             <Link to="/" className="text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                            <Link to="/register" className="text-white px-3 py-2 rounded-md text-sm font-medium">Register</Link><br/>
-                            {!isLogined && <Link to="/login" className="text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>}
+                            {!isLogined && (
+                                <>
+                                    <Link to="/register" className="text-white px-3 py-2 rounded-md text-sm font-medium">Register</Link>
+                                    <Link to="/login" className="text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                                </>
+                            )}
                             {isLogined && (
                                 <>
                                     <Link to="/createCalendar" className="text-white px-3 py-2 rounded-md text-sm font-medium">Create a new Calendar</Link>
@@ -44,4 +48,4 @@ const Layout = () => {
     );
 }
 
-export default Layout
+export default Layout;
