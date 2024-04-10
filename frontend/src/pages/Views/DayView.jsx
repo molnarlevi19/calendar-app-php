@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useParams} from "react-router-dom";
 
 const DayView = ({ day }) => {
@@ -105,7 +105,13 @@ const DayView = ({ day }) => {
                     </div>
                 )}
                 {(startTime !== null && endTime !== null && title.trim() !== "" && description.trim() !== "") && (
-                    <button onClick={handleSubmitEvent}>Submit Event</button>
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                        onClick={handleSubmitEvent}
+                    >
+                        Submit Event
+                    </button>
                 )}
             </div>
         </div>
