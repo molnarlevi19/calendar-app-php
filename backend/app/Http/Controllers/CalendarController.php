@@ -5,52 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Calendar;
 
 
+use App\Services\CalendarService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CalendarController extends Controller
 {
-    public function store(Request $request)
+    private CalendarService $calendarService;
+
+    public function __construct(CalendarService $calendarService)
     {
-        $validator = Validator::make($request->all(),[
-            'calendar_name' => 'required|string|max:255',
-            'calendar_description' => 'nullable|string|max:255',
-            'user_id' => [
-                'required',
-                'integer',
-                Rule::exists('users', 'id'),
-            ],
-        ]);
+        $this->calendarService = $calendarService;
+    }
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
 
-        $calendar = Calendar::create([
-            'calendar_name' => $request->input('calendar_name'),
-            'calendar_description' => $request->input('calendar_description'),
-            'user_id' => $request->input('user_id'),
-        ]);
-
-        return \response()->json([$calendar], Response::HTTP_CREATED);
+    public function store(Request $request): JsonResponse
+    {
+        return $this->calendarService->store($request);
     }
 
     public function allCalendars(): array
     {
-     $user = Auth::user();
-
-     $calendars = $user->calendars;
-     $calendarNames = [];
-
-         foreach ($calendars as $calendar) {
-
-             $calendarNames[$calendar->calendar_id] = $calendar->calendar_name;
-         }
-
-         return $calendarNames;
+     return $this->calendarService->allCalendars();
     }
 }
