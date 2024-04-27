@@ -1,9 +1,9 @@
-import React from 'react'
-import {useEffect} from 'react'
-import {useState} from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import {useEffect} from 'react';
+import {useState} from 'react';
+import {Link, Outlet, useNavigate} from 'react-router-dom';
 
 const Layout = () => {
+    const navigate = useNavigate();
     const [isLogined, setIsLogined] = useState(false);
 
     useEffect(() => {
@@ -11,10 +11,31 @@ const Layout = () => {
         setIsLogined(userToken !== null);
     }, [isLogined]);
 
-    function handleLogout() {
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("user_id");
-        setIsLogined(false);
+    async function handleLogout() {
+        const userToken = localStorage.getItem('userToken');
+        const out = 'Bearer ' + userToken;
+        const logoutUrl = "api/logout";
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': out,
+            }
+
+        };
+        try {
+            const response = await fetch(logoutUrl, requestOptions);
+            const data = response.json();
+
+            if (!response.ok) {
+                console.error(data);
+            }
+
+            localStorage.clear();
+            setIsLogined(false);
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
