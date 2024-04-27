@@ -33,12 +33,12 @@ const EditProfileModal = ({closeModal}) => {
 
         try {
             const response = await fetch(updateUrl, requestOptions);
+            const data = await response.json();
 
             if (!response.ok){
-                console.log("nem siker");
+                alert(data.error);
             }
 
-            console.log("siker");
             closeModal();
         } catch (error) {
             console.error('Error updating profile:', error);
