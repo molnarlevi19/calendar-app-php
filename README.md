@@ -83,6 +83,10 @@ php artisan migrate
 php artisan serve
 ```
 
+## Project Roadmap
+
+The project roadmap is managed using Trello. [here](https://trello.com/invite/b/ObH0vUEb/ATTIfb670166c8aef3e43103a3d9890fc60b703FE816/calendar-app).
+
 ## Author:
 
 * Molnár Levente (molnarlevi19@gmail.com)
