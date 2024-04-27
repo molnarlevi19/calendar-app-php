@@ -68,6 +68,14 @@ cd {local_folder_of_cloned_project/backend}
 # Install dependencies
 composer install
 
+#Create a '.env' file in the root directory of the project and set your mysql environment variables based on '.env.example':
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306  # Replace with your MySQL port number
+DB_DATABASE=your_database_name  # Replace with your MySQL database name
+DB_USERNAME=your_username  # Replace with your MySQL username
+DB_PASSWORD=your_password  # Replace with your MySQL password
+
 # migrate the database
 php artisan migrate
 
