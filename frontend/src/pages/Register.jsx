@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -13,9 +13,9 @@ const Register = () => {
         setPassword('')
     }
 
-    const handleSubmit = (event) => {
+    async function handleSubmit(event){
         event.preventDefault();
-        const registerUrl = '/api/register';
+        const registerUrl = 'api/register';
 
         const requestOptions = {
             method: 'POST',
@@ -23,19 +23,19 @@ const Register = () => {
             body: JSON.stringify({ username: username, password: password, email: email })
         };
 
-        fetch(registerUrl, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                navigate("/");
-                console.log(data);
-                clearInputs();
+        try {
+            const response = await fetch(registerUrl, requestOptions);
+            const data = await response.json();
 
-            })
-            .catch(error => {
-                console.error(error);
+            if (!response.ok){
                 clearInputs();
+                console.error("Error: ", data.error);
+            }
 
-            });
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
