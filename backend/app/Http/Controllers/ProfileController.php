@@ -3,33 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProfileController extends Controller
 {
-    public function update($id, Request $request)
+    private ProfileService $profileService;
+
+    public function __construct(ProfileService $profileService)
     {
-        $user = User::findOrFail($id);
-
-        $validateData = $request->validate([
-            'surname' => 'nullable|string|max:255',
-            'lastname' => 'nullable|string|max:255',
-            'birthdate' => 'nullable|date',
-            'UserGender' => 'nullable|string|in:MALE,FEMALE',
-            'phone' => 'nullable|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'imageid' => 'nullable|exists:profileimages,id',
-        ]);
-
-        $user->update($validateData);
-
-        return response()->json(['message' => 'Profile updated successfully.']);
+        $this->profileService = $profileService;
     }
 
-    public function index($id)
-    {
-        $user = User::findOrFail($id);
 
-        return response()->json($user);
+    public function update($id, Request $request): JsonResponse
+    {
+        return $this->profileService->update($id, $request);
+    }
+
+    public function index($id): JsonResponse
+    {
+       return $this->profileService->index($id);
     }
 }
