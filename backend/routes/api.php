@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('storeCalendar', [CalendarController::class, 'store']);
     Route::post('storeEvent', [EventController::class, 'store']);
     Route::post('createImage', [ImageController::class, 'store']);
+    Route::post('logout', [AuthController::class, 'logout']);
 });
 Route::patch('profile/{id}', [ProfileController::class, 'update']);
 Route::get('profile/{id}', [ProfileController::class, 'index']);
