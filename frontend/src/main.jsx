@@ -10,6 +10,7 @@ import EventCalendarView from "./pages/Views/EventCalendarView.jsx";
 import Home from "./pages/Home.jsx";
 import CalendarCreator from "./pages/CalendarCreator.jsx";
 import UserAllCalendars from "./pages/Views/UserAllCalendars.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +42,10 @@ const router = createBrowserRouter([
                 path: "/test",
                 element: <UserAllCalendars />,
             },
-
+            {
+                path: "/profile",
+                element: <UserProfile />,
+            },
         ],
     },
 ]);

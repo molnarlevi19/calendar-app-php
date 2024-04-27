@@ -9,7 +9,7 @@ const Layout = () => {
     useEffect(() => {
         const userToken = localStorage.getItem('userToken');
         setIsLogined(userToken !== null);
-    }, []);
+    }, [isLogined]);
 
     function handleLogout() {
         localStorage.removeItem("userToken");
@@ -34,6 +34,7 @@ const Layout = () => {
                                 <>
                                     <Link to="/createCalendar" className="text-white px-3 py-2 rounded-md text-sm font-medium">Create a new Calendar</Link>
                                     <Link to="/test" className="text-white px-3 py-2 rounded-md text-sm font-medium">All created Calendars</Link>
+                                    <Link to="/profile" className="text-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
                                     <button onClick={handleLogout} className="text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
                                 </>
                             )}

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TemperatureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +30,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('allCalendars', [CalendarController::class, 'allCalendars']);
     Route::post('storeCalendar', [CalendarController::class, 'store']);
     Route::post('storeEvent', [EventController::class, 'store']);
+    Route::post('createImage', [ImageController::class, 'store']);
 });
+Route::patch('profile/{id}', [ProfileController::class, 'update']);
+Route::get('profile/{id}', [ProfileController::class, 'index']);
+Route::get('images/{id}', [ImageController::class, 'index']);
+
 
 Route::get('temperature', [TemperatureController::class, 'getTemperature']);
 
