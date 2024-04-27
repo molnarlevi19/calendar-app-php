@@ -68,6 +68,9 @@ cd {local_folder_of_cloned_project/backend}
 # Install dependencies
 composer install
 
+# migrate the database
+php artisan migrate
+
 #run application
 php artisan serve
 ```
