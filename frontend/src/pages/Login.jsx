@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import {useState} from "react";
 
 const Login = () => {
     let navigate = useNavigate();
@@ -11,7 +11,7 @@ const Login = () => {
         setPassword('')
     }
 
-    const handleLogin = (event) => {
+    async function handleLogin (event){
         event.preventDefault();
         const LoginUrl = '/api/login';
 
@@ -19,24 +19,24 @@ const Login = () => {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email: email, password: password})
-        };
+        }
 
-        fetch(LoginUrl, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                clearInputs();
-                localStorage.setItem("userToken", data.token);
-                localStorage.setItem("user_id", data.user_id);
-                console.log('Token:', data.token);
-                console.log('Token:', data.user_id);
-                navigate('/');
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error(error);
-                clearInputs();
+        try {
+            const response = await fetch(LoginUrl, requestOptions);
+            const data = await response.json();
 
-            });
+            if (!response.ok) {
+                return alert(data.message);
+            }
+
+            clearInputs();
+            localStorage.setItem("userToken", data.token);
+            localStorage.setItem("user_id", data.user_id);
+            navigate("/");
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
