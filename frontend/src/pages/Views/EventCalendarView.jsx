@@ -35,9 +35,13 @@ const EventCalendarView = () => {
             <div className="month text-lg font-semibold mb-4">
                 {format(currentDate, 'MMMM yyyy')}
             </div>
-            <div>
-                <button onClick={goToPreviousMonth}>Previous</button>
-                <button onClick={goToNextMonth}>Next</button>
+            <div className="flex justify-between mb-4">
+                <button onClick={goToPreviousMonth} className="text-sm">
+                    ≤ Previous
+                </button>
+                <button onClick={goToNextMonth} className="text-sm">
+                    Next ≥
+                </button>
             </div>
             <div className="weekdays grid grid-cols-7 gap-2">
                 {WEEKDAYS.map((day) => (
