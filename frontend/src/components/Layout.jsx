@@ -24,7 +24,7 @@ const Layout = () => {
         };
         try {
             const response = await fetch(logoutUrl, requestOptions);
-            const data = response.json();
+            const data = await response.json();
 
             if (!response.ok) {
                 console.error(data);
