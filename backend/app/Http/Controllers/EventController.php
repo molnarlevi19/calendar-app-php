@@ -24,4 +24,9 @@ class EventController extends Controller
     {
         return $this->eventService->store($request);
     }
+
+    public function index($id): JsonResponse
+    {
+        return $this->eventService->index($id);
+    }
 }
