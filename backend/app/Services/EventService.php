@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Calendar;
 use App\Models\Event;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -38,5 +40,15 @@ class EventService
         ]);
 
         return \response()->json([$event], Response::HTTP_CREATED);
+    }
+
+    public function index($id): JsonResponse
+    {
+        try {
+            $events = Event::where('calendar_id', $id)->get();
+            return response()->json($events);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve events'. $e], 500);
+        }
     }
 }

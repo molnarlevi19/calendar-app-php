@@ -6,7 +6,6 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TemperatureController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
@@ -33,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('createImage', [ImageController::class, 'store']);
     Route::post('logout', [AuthController::class, 'logout']);
 });
+Route::get('calendar/{id}', [EventController::class, 'index']);
 Route::patch('profile/{id}', [ProfileController::class, 'update']);
 Route::get('profile/{id}', [ProfileController::class, 'index']);
 Route::get('images/{id}', [ImageController::class, 'index']);

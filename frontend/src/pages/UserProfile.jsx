@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import EditProfileModal from "../components/modals/EditProfileModal.jsx";
 
 const UserProfile = () => {
@@ -114,7 +114,7 @@ const UserProfile = () => {
             </div>
             <div className="px-4 py-5 sm:px-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    {data.username}'s Profile
+                    {data.username}&#39;s Profile
                 </h3>
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">
                     This is some information about the user.
@@ -180,15 +180,3 @@ const UserProfile = () => {
 }
 
 export default UserProfile;
-
-
-/*<div className="flex items-center justify-between">
-    <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="submit"
-        onSubmit=
-        disabled
-    >
-        Save Profile
-    </button>
-</div>*/

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {useParams} from "react-router-dom";
 
 const DayView = ({ day }) => {
@@ -7,7 +7,7 @@ const DayView = ({ day }) => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [title, setTitle] = useState("");
-    const [description ,setDescription] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleTimeClick = (hour) => {
         if (!startTime) {
@@ -20,15 +20,18 @@ const DayView = ({ day }) => {
         }
     };
 
-    const handleSubmitEvent = () => {
-        const createEventUrl = '/api/storeEvent';
+    async function handleSubmitEvent() {
+        const token = localStorage.getItem('userToken');
 
         if (startTime !== null && endTime !== null && title.trim() !== "" && description.trim() !== "") {
-            const startDate = `${day.toISOString().split('T')[0]}T${startTime}:00`;
-            const endDate = `${day.toISOString().split('T')[0]}T${endTime}:00`;
-            const token = localStorage.getItem('userToken');
+            const nextDay = new Date(day);
+            nextDay.setDate(nextDay.getDate() + 1);
 
-            fetch(createEventUrl, {
+            const startDate = `${nextDay.toISOString().split('T')[0]}T${startTime}:00`;
+            const endDate = `${nextDay.toISOString().split('T')[0]}T${endTime}:00`;
+
+            const createEventUrl = '/api/storeEvent';
+            const requestOptions = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,18 +44,25 @@ const DayView = ({ day }) => {
                     end_date: endDate,
                     calendar_id: id
                 }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
+            }
 
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+            try {
 
-                });
+                const response = await fetch(createEventUrl, requestOptions);
+                const data = await response.json();
+
+                if(!response.ok) {
+                    console.error(data.error);
+                }
+
+                alert("Created event successfully");
+            } catch (error) {
+
+                console.error('Error:', error.message);
+            }
         }
-    };
+    }
+
 
     const renderHours = () => {
         const hoursInADay = 24;
